@@ -6,40 +6,47 @@
     <title>Cabo Score Tracker</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* Cabo-specific additional styles */
+        /* Cabo-specific styles - Industrial/Effective Altruism Theme */
         .cabo-info {
-            background: linear-gradient(135deg, var(--ibm-purple-dark) 0%, var(--ibm-magenta-dark) 100%);
-            color: var(--neutral-white);
+            background: var(--concrete-90);
+            color: var(--paper-white);
             padding: 20px;
-            border-radius: 8px;
             margin-bottom: 20px;
+            border: none;
         }
         
         .cabo-info h3 {
-            color: var(--neutral-white);
-            margin-bottom: 10px;
+            color: var(--paper-white);
+            margin-bottom: 12px;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--concrete-30);
         }
         
         .cabo-info ul {
             margin-left: 20px;
-            line-height: 1.6;
+            line-height: 1.7;
         }
         
         .cabo-info li {
-            margin-bottom: 5px;
+            margin-bottom: 6px;
+            font-size: 0.95em;
         }
         
         .scoring-rules {
-            background: var(--neutral-gray-10);
-            padding: 15px;
-            border-radius: 8px;
+            background: var(--concrete-05);
+            padding: 20px;
             margin-bottom: 20px;
-            border: 1px solid var(--neutral-gray-20);
+            border: var(--border-standard);
         }
         
         .scoring-rules h4 {
-            color: var(--ibm-purple-dark);
-            margin-bottom: 10px;
+            color: var(--concrete-100);
+            margin-bottom: 12px;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
         
         .scoring-rules ul {
@@ -49,77 +56,83 @@
         
         .card-values {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
             gap: 10px;
             margin-top: 15px;
         }
         
         .card-type {
-            background: var(--neutral-white);
-            padding: 10px;
-            border-radius: 4px;
-            border-left: 4px solid var(--ibm-blue);
+            background: var(--paper-white);
+            padding: 12px;
+            border: var(--border-standard);
+            border-left: 3px solid var(--steel-medium);
+            font-size: 0.9em;
         }
         
         .card-type.choice {
-            border-left-color: var(--ibm-magenta);
+            border-left-color: var(--accent-primary);
         }
         
         .card-type.special {
-            border-left-color: var(--ibm-orange);
+            border-left-color: var(--warning-color);
         }
         
         .cabo-checkbox {
             display: flex;
             align-items: center;
-            gap: 8px;
-            margin-top: 10px;
-            padding: 10px;
-            background: var(--neutral-gray-10);
-            border-radius: 4px;
+            gap: 10px;
+            margin-top: 12px;
+            padding: 12px;
+            background: var(--paper-white);
+            border: var(--border-standard);
         }
         
         .cabo-checkbox input[type="checkbox"] {
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
             cursor: pointer;
+            accent-color: var(--accent-primary);
         }
         
         .cabo-checkbox label {
-            font-weight: 600;
-            color: var(--ibm-magenta-dark);
+            font-weight: 500;
+            color: var(--concrete-100);
             cursor: pointer;
+            font-size: 0.95em;
         }
         
+        /* Flat badges - no gradients */
         .kamikaze-badge {
-            background: linear-gradient(135deg, var(--ibm-orange) 0%, var(--ibm-yellow) 100%);
-            color: var(--neutral-white);
+            background: var(--warning-color);
+            color: var(--paper-white);
             padding: 2px 8px;
-            border-radius: 12px;
-            font-size: 0.75em;
-            font-weight: bold;
+            font-size: 0.7em;
+            font-weight: 600;
             margin-left: 8px;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
         }
         
         .penalty-badge {
             background: var(--error-color);
-            color: var(--neutral-white);
+            color: var(--paper-white);
             padding: 2px 8px;
-            border-radius: 12px;
-            font-size: 0.75em;
-            font-weight: bold;
+            font-size: 0.7em;
+            font-weight: 600;
             margin-left: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
         }
         
         .bonus-badge {
             background: var(--success-color);
-            color: var(--neutral-white);
+            color: var(--paper-white);
             padding: 2px 8px;
-            border-radius: 12px;
-            font-size: 0.75em;
-            font-weight: bold;
+            font-size: 0.7em;
+            font-weight: 600;
             margin-left: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
         }
         
         .round-actions {
@@ -130,46 +143,62 @@
         }
         
         .total-score-display {
-            font-size: 1.1em;
-            font-weight: bold;
+            font-size: 1em;
+            font-weight: 500;
             margin-top: 8px;
             padding: 8px;
-            background: var(--neutral-gray-10);
-            border-radius: 4px;
+            background: var(--concrete-05);
+            border: var(--border-standard);
             text-align: center;
         }
         
         .exact-100 {
-            color: var(--ibm-blue-dark);
+            color: var(--accent-primary);
+            font-weight: 600;
         }
         
         .over-100 {
             color: var(--error-color);
-            font-weight: bold;
+            font-weight: 600;
         }
         
         .game-ended-banner {
-            background: linear-gradient(135deg, var(--ibm-yellow) 0%, var(--ibm-orange) 100%);
-            color: var(--neutral-white);
-            padding: 20px;
-            border-radius: 8px;
-            text-align: center;
+            background: var(--warning-background);
+            color: var(--concrete-100);
+            padding: 18px;
             margin-bottom: 20px;
-            font-size: 1.2em;
-            font-weight: bold;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+            font-size: 1.05em;
+            font-weight: 600;
+            text-align: center;
+            border: 1px solid var(--warning-color);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        /* Utility link style */
+        .back-link {
+            color: var(--accent-primary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+        
+        .back-link:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div style="text-align: center; margin-bottom: 15px;">
-            <a href="index.html" style="color: var(--ibm-blue-dark); text-decoration: none; font-weight: 600;">← Back to Games</a>
+            <a href="index.html" class="back-link">← Back to Games</a>
         </div>
-        <h1>🃏 Cabo Score Tracker</h1>
+        <h1>Cabo Score Tracker</h1>
         
         <div class="cabo-info">
-            <h3>📋 Game Rules Summary</h3>
+            <h3>Game Rules Summary</h3>
             <ul>
                 <li>Goal: Have the <strong>lowest score</strong> when someone exceeds 100 points</li>
                 <li>Each round: Winner gets 0 points, others get their hand value</li>
@@ -181,7 +210,7 @@
         </div>
 
         <div class="scoring-rules">
-            <h4>🎴 Card Values</h4>
+            <h4>Card Values</h4>
             <div class="card-values">
                 <div class="card-type">
                     <strong>Number Cards (0-6):</strong> Face value
@@ -213,7 +242,7 @@
 
         <div id="gameSection" class="game-section" style="display: none;">
             <div id="gameEndedBanner" class="game-ended-banner" style="display: none;">
-                🎉 GAME OVER! Check the final rankings below 🎉
+                Game Over — Check the final rankings below
             </div>
             
             <div class="round-info">
@@ -225,7 +254,7 @@
             </div>
 
             <div class="leaderboard">
-                <h3>🏆 Leaderboard</h3>
+                <h3>Leaderboard</h3>
                 <div id="leaderboardList"></div>
             </div>
 
@@ -249,10 +278,10 @@
     <!-- Winner Modal -->
     <div id="winnerModal" class="winner-modal" style="display: none;">
         <div class="winner-modal-content">
-            <div class="winner-crown">👑</div>
-            <h2 class="winner-title">GAME OVER!</h2>
+            <div class="winner-crown">&#9733;</div>
+            <h2 class="winner-title">Game Over</h2>
             <div class="winner-announcement">
-                <span class="winner-label">WINNER</span>
+                <span class="winner-label">Winner</span>
                 <span id="winnerName" class="winner-name"></span>
                 <span id="winnerScore" class="winner-score"></span>
             </div>

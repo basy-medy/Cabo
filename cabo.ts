@@ -275,26 +275,12 @@ class CaboGame {
 
             // Assign scores
             for (const score of roundData.scores) {
-                if (actualWinnerId === -1) {
-                    // Tie with no Cabo caller - tied players get 0
-                    const isTied = winners.some(w => w.playerId === score.playerId);
-                    if (isTied) {
-                        score.finalScore = 0;
-                    } else {
-                        score.finalScore = score.handScore;
-                    }
-                } else {
-                    // Normal case
-                    if (score.playerId === actualWinnerId) {
-                        score.finalScore = 0;
-                    } else {
-                        score.finalScore = score.handScore;
-                    }
-                }
+                // Everyone gets their hand score by default
+                score.finalScore = score.handScore;
 
-                // Apply Cabo penalty if caller didn't win
+                // Cabo caller who got it wrong gets +10 penalty
                 if (score.calledCabo && score.playerId !== actualWinnerId) {
-                    score.finalScore += 5;
+                    score.finalScore += 10;
                 }
             }
         }
@@ -361,7 +347,7 @@ class CaboGame {
             
             if (score.kamikaze) badges.push('<span class="kamikaze-badge">KAMIKAZE</span>');
             else if (isWinner) badges.push('<span class="bonus-badge">WINNER</span>');
-            else if (score.calledCabo) badges.push('<span class="penalty-badge">CABO +5</span>');
+            else if (score.calledCabo) badges.push('<span class="penalty-badge">CABO +10</span>');
 
             detailsHTML += `
                 <div style="margin: 5px 0; padding: 5px; background: rgba(255,255,255,0.1); border-radius: 4px;">

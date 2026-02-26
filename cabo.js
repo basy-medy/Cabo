@@ -1,10 +1,11 @@
 // cabo.ts
+// Industrial/EA Theme - Muted, functional colors for player identification
 var playerColors = [
-  "#648fff",
-  "#785ef0",
-  "#dc267f",
-  "#fe6100",
-  "#ffb000"
+  "#1a5f7a", // Muted teal (primary accent)
+  "#5d6d7e", // Steel blue-gray
+  "#4a6741", // Muted green
+  "#7d5a5a", // Muted brick
+  "#6b5b73"  // Muted purple-gray
 ];
 
 class CaboGame {
@@ -220,22 +221,12 @@ class CaboGame {
       }
       roundData.winnerId = actualWinnerId;
       for (const score of roundData.scores) {
-        if (actualWinnerId === -1) {
-          const isTied = winners.some((w) => w.playerId === score.playerId);
-          if (isTied) {
-            score.finalScore = 0;
-          } else {
-            score.finalScore = score.handScore;
-          }
-        } else {
-          if (score.playerId === actualWinnerId) {
-            score.finalScore = 0;
-          } else {
-            score.finalScore = score.handScore;
-          }
-        }
+        // Everyone gets their hand score by default
+        score.finalScore = score.handScore;
+
+        // Cabo caller who got it wrong gets +10 penalty
         if (score.calledCabo && score.playerId !== actualWinnerId) {
-          score.finalScore += 5;
+          score.finalScore += 10;
         }
       }
     }
@@ -290,9 +281,9 @@ class CaboGame {
       else if (isWinner)
         badges.push('<span class="bonus-badge">WINNER</span>');
       else if (score.calledCabo)
-        badges.push('<span class="penalty-badge">CABO +5</span>');
+        badges.push('<span class="penalty-badge">CABO +10</span>');
       detailsHTML += `
-                <div style="margin: 5px 0; padding: 5px; background: rgba(255,255,255,0.1); border-radius: 4px;">
+                <div style="margin: 5px 0; padding: 5px; background: rgba(255,255,255,0.1);">
                     <strong style="color: ${player.color}">${player.name}</strong>: 
                     Hand ${score.handScore} → Round ${score.finalScore >= 0 ? "+" : ""}${score.finalScore}
                     ${badges.join("")}
@@ -430,7 +421,8 @@ class CaboGame {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     const particles = [];
-    const colors = ["#648fff", "#785ef0", "#dc267f", "#fe6100", "#ffb000"];
+    // Industrial/EA Theme - Confetti colors
+const colors = ["#1a5f7a", "#5d6d7e", "#4a6741", "#7d5a5a", "#6b5b73"];
     for (let i = 0;i < 150; i++) {
       particles.push({
         x: Math.random() * canvas.width,
