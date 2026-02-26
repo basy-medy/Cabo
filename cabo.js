@@ -1,13 +1,14 @@
 // cabo.js
-// Soft Industrial Design - Scandinavian hardware-inspired aesthetic
-// Muted, warm color palette with terracotta accent
+// IBM Color Blind Safe Palette Design System
+// Bold, accessible, high-contrast visual system
+// https://www.ibm.com/design/language/color/
 
 const playerColors = [
-    "#c4a48c", // Terracotta accent (primary)
-    "#6b9080", // Muted sage green
-    "#7d8b8c", // Steel blue-gray
-    "#9b8b7a", // Warm taupe
-    "#8a7f8d"  // Dusty lavender-gray
+    "#648fff", // IBM Blue - Player 1
+    "#785ef0", // IBM Purple - Player 2
+    "#dc267f", // IBM Magenta - Player 3
+    "#fe6100", // IBM Orange - Player 4
+    "#ffb000"  // IBM Gold - Player 5
 ];
 
 class CaboGame {
@@ -250,7 +251,11 @@ class CaboGame {
             return;
         }
 
-        // Calculate round scores
+        // Calculate round scores based on Cabo rules:
+        // 1. Cabo caller with lowest points → 0 points
+        // 2. Cabo caller but NOT lowest → hand score + 10 penalty
+        // 3. Non-Cabo caller with lowest → exact hand score (no bonus)
+        // 4. Everyone else → exact hand score
         if (kamikazePlayerId !== -1) {
             for (const score of roundData.scores) {
                 if (score.playerId === kamikazePlayerId) {
@@ -262,26 +267,40 @@ class CaboGame {
         } else {
             const validScores = roundData.scores.filter((s) => !s.kamikaze);
             const minHandScore = Math.min(...validScores.map((s) => s.handScore));
-            const winners = roundData.scores.filter((s) => s.handScore === minHandScore && !s.kamikaze);
+            const lowestScorers = roundData.scores.filter((s) => s.handScore === minHandScore && !s.kamikaze);
 
-            let actualWinnerId;
-            if (winners.length === 1) {
-                actualWinnerId = winners[0].playerId;
-            } else {
-                const caboCallerInTie = winners.find((w) => w.playerId === caboCallerId);
-                if (caboCallerInTie) {
-                    actualWinnerId = caboCallerId;
-                } else {
-                    actualWinnerId = -1;
+            // Determine winner and calculate final scores
+            let caboCallerWon = false;
+            let winnerId = -1;
+
+            // Check if Cabo caller has the lowest score
+            if (caboCallerId !== -1) {
+                const caboCallerScore = roundData.scores.find((s) => s.playerId === caboCallerId);
+                if (caboCallerScore && caboCallerScore.handScore === minHandScore) {
+                    caboCallerWon = true;
+                    winnerId = caboCallerId;
                 }
             }
 
-            roundData.winnerId = actualWinnerId;
+            // If Cabo caller didn't win, determine winner among lowest scorers
+            if (!caboCallerWon && lowestScorers.length > 0) {
+                // In case of tie among non-Cabo callers, first one wins (or could be random)
+                winnerId = lowestScorers[0].playerId;
+            }
+
+            roundData.winnerId = winnerId;
 
             for (const score of roundData.scores) {
-                score.finalScore = score.handScore;
-                if (score.calledCabo && score.playerId !== actualWinnerId) {
-                    score.finalScore += 5; // +5 penalty for wrong Cabo call
+                if (score.calledCabo && caboCallerWon) {
+                    // Rule 1: Cabo caller with lowest points → 0 points
+                    score.finalScore = 0;
+                } else if (score.calledCabo && !caboCallerWon) {
+                    // Rule 2: Cabo caller but NOT lowest → hand score + 10
+                    score.finalScore = score.handScore + 10;
+                    score.caboPenalty = true;
+                } else {
+                    // Rule 3 & 4: Non-Cabo caller gets exact hand score
+                    score.finalScore = score.handScore;
                 }
             }
         }
@@ -352,8 +371,8 @@ class CaboGame {
                 badges.push('<span class="badge badge-kamikaze">Kamikaze</span>');
             } else if (isWinner) {
                 badges.push('<span class="badge badge-bonus">Winner</span>');
-            } else if (score.calledCabo) {
-                badges.push('<span class="badge badge-penalty">Cabo +5</span>');
+            } else if (score.caboPenalty) {
+                badges.push('<span class="badge badge-penalty">Cabo +10</span>');
             }
 
             if (score.exact100Reset) {
@@ -402,7 +421,7 @@ class CaboGame {
 
         // Empty state
         if (this.players.length === 0 || this.currentRound === 1) {
-            ctx.fillStyle = "#a8a49e";
+            ctx.fillStyle = "#6f6f6f"; // IBM Gray 50
             ctx.font = "14px Inter, sans-serif";
             ctx.textAlign = "center";
             ctx.fillText("Score progress will appear after round 1", rect.width / 2, rect.height / 2);
@@ -420,7 +439,7 @@ class CaboGame {
         const yScale = height / Math.max(maxScore, 50);
 
         // Draw grid
-        ctx.strokeStyle = "#e8e5e1";
+        ctx.strokeStyle = "#e0e0e0"; // IBM Gray 10
         ctx.lineWidth = 1;
 
         // Horizontal grid lines
@@ -433,26 +452,26 @@ class CaboGame {
                 ctx.lineTo(rect.width - padding, y);
                 ctx.stroke();
 
-                ctx.fillStyle = "#a8a49e";
+                ctx.fillStyle = "#6f6f6f"; // IBM Gray 50
                 ctx.font = "11px JetBrains Mono, monospace";
                 ctx.textAlign = "right";
                 ctx.fillText(score.toString(), padding - 8, y + 4);
             }
         }
 
-        // 100 threshold line
+        // 100 threshold line - IBM Orange for high visibility
         const y100 = rect.height - padding - 100 * yScale;
         if (y100 > padding) {
-            ctx.strokeStyle = "#b06a6a";
+            ctx.strokeStyle = "#fe6100"; // IBM Orange
             ctx.setLineDash([6, 4]);
-            ctx.lineWidth = 1.5;
+            ctx.lineWidth = 2;
             ctx.beginPath();
             ctx.moveTo(padding, y100);
             ctx.lineTo(rect.width - padding, y100);
             ctx.stroke();
             ctx.setLineDash([]);
 
-            ctx.fillStyle = "#b06a6a";
+            ctx.fillStyle = "#fe6100"; // IBM Orange
             ctx.font = "bold 10px Inter, sans-serif";
             ctx.textAlign = "left";
             ctx.fillText("100 (Game End)", padding + 5, y100 - 5);
@@ -499,7 +518,7 @@ class CaboGame {
         });
 
         // X-axis labels
-        ctx.fillStyle = "#6b6965";
+        ctx.fillStyle = "#393939"; // IBM Gray 70
         ctx.font = "11px Inter, sans-serif";
         ctx.textAlign = "center";
         for (let i = 0; i < this.currentRound; i++) {
@@ -516,7 +535,7 @@ class CaboGame {
             ctx.arc(legendX + 6, legendY, 5, 0, Math.PI * 2);
             ctx.fill();
 
-            ctx.fillStyle = "#2d2c2a";
+            ctx.fillStyle = "#161616"; // IBM Gray 90
             ctx.font = "12px Inter, sans-serif";
             ctx.textAlign = "left";
             ctx.fillText(player.name, legendX + 16, legendY + 4);
@@ -563,7 +582,8 @@ class CaboGame {
         canvas.height = window.innerHeight * dpr;
         ctx.scale(dpr, dpr);
 
-        const colors = [...playerColors, "#c4a48c", "#6b9080", "#9b8b7a"];
+        // Confetti colors - IBM Color Blind Safe Palette
+        const colors = [...playerColors, "#648fff", "#785ef0", "#dc267f"];
         const particles = [];
 
         for (let i = 0; i < 150; i++) {

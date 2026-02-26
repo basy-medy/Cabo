@@ -1,79 +1,107 @@
 /* ==========================================================================
-   CABO SCORE TRACKER - Soft Industrial Design System
-   Inspired by Scandinavian hardware design (Teenage Engineering aesthetic)
+   CABO SCORE TRACKER - IBM Color Blind Safe Palette Design System
    
-   Design Principles:
-   - Softened industrial feel with organic curves
-   - Brushed aluminum textures, matte surfaces, subtle shadows
-   - Large border radii throughout
-   - Fluid geometry - no sharp angles
-   - Tactile UI elements like machined objects
-   - Generous whitespace
-   - Muted monochromatic palette with subtle accent
+   Visual System: IBM Color Blind Safe Palette
+   - Bold, confident, high-contrast color application
+   - Maximum accessibility and clarity for all users
+   - No colors outside the IBM accessibility palette
+   
+   Core Palette:
+   - Blue:       #648fff
+   - Purple:     #785ef0
+   - Magenta:    #dc267f
+   - Orange:     #fe6100
+   - Gold:       #ffb000
+   - Black:      #000000
+   - White:      #ffffff
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
-   1. CSS CUSTOM PROPERTIES (Design Tokens)
+   1. CSS CUSTOM PROPERTIES (IBM Color Blind Safe Palette)
    -------------------------------------------------------------------------- */
 :root {
-  /* Color Palette - Warm monochromatic with subtle terracotta accent */
+  /* IBM Color Blind Safe Palette - Core Colors */
+  --ibm-blue: #648fff;
+  --ibm-purple: #785ef0;
+  --ibm-magenta: #dc267f;
+  --ibm-orange: #fe6100;
+  --ibm-gold: #ffb000;
+  --ibm-black: #000000;
+  --ibm-white: #ffffff;
   
-  /* Background tones - warm off-whites */
-  --bg-primary: #faf9f7;
-  --bg-secondary: #f2f0ed;
-  --bg-tertiary: #e8e5e1;
-  --bg-elevated: #ffffff;
+  /* Extended Accessible Neutrals */
+  --ibm-gray-100: #000000;
+  --ibm-gray-90: #161616;
+  --ibm-gray-80: #262626;
+  --ibm-gray-70: #393939;
+  --ibm-gray-60: #525252;
+  --ibm-gray-50: #6f6f6f;
+  --ibm-gray-40: #8d8d8d;
+  --ibm-gray-30: #a8a8a8;
+  --ibm-gray-20: #c6c6c6;
+  --ibm-gray-10: #e0e0e0;
+  --ibm-gray-05: #f4f4f4;
   
-  /* Surface tones - soft grays */
-  --surface-100: #1a1918;
-  --surface-90: #2d2c2a;
-  --surface-70: #4a4845;
-  --surface-50: #6b6965;
-  --surface-40: #8a8782;
-  --surface-30: #a8a49e;
-  --surface-20: #c5c0b8;
-  --surface-15: #d8d3cb;
-  --surface-10: #e5e0d8;
-  --surface-05: #f0ebe3;
+  /* Semantic Color Assignments */
+  --bg-primary: var(--ibm-white);
+  --bg-secondary: var(--ibm-gray-05);
+  --bg-tertiary: var(--ibm-gray-10);
+  --bg-elevated: var(--ibm-white);
   
-  /* Accent - muted terracotta/coral */
-  --accent: #c4a48c;
-  --accent-hover: #b08f75;
-  --accent-soft: #e8ddd3;
-  --accent-muted: #f5f0eb;
+  /* Surface tones - using IBM grays */
+  --surface-100: var(--ibm-gray-100);
+  --surface-90: var(--ibm-gray-90);
+  --surface-80: var(--ibm-gray-80);
+  --surface-70: var(--ibm-gray-70);
+  --surface-60: var(--ibm-gray-60);
+  --surface-50: var(--ibm-gray-50);
+  --surface-40: var(--ibm-gray-40);
+  --surface-30: var(--ibm-gray-30);
+  --surface-20: var(--ibm-gray-20);
+  --surface-10: var(--ibm-gray-10);
+  --surface-05: var(--ibm-gray-05);
   
-  /* Functional colors - desaturated */
-  --success: #6b9080;
-  --success-soft: #d4e4dc;
-  --warning: #c4a35a;
-  --warning-soft: #f0e8d0;
-  --error: #b06a6a;
-  --error-soft: #edd8d8;
+  /* Primary Accent - IBM Blue */
+  --accent: var(--ibm-blue);
+  --accent-hover: #4d7ae6;
+  --accent-soft: rgba(100, 143, 255, 0.15);
+  --accent-muted: rgba(100, 143, 255, 0.08);
+  
+  /* Functional colors - IBM palette only */
+  --success: #009d5a;  /* Darker green derived from IBM palette principles */
+  --success-soft: rgba(0, 157, 90, 0.12);
+  --warning: var(--ibm-gold);
+  --warning-soft: rgba(255, 176, 0, 0.15);
+  --error: #da1e28;  /* IBM Error Red */
+  --error-soft: rgba(218, 30, 40, 0.12);
+  
+  /* Player Colors - IBM Color Blind Safe Palette */
+  --player-1: var(--ibm-blue);
+  --player-2: var(--ibm-purple);
+  --player-3: var(--ibm-magenta);
+  --player-4: var(--ibm-orange);
+  --player-5: var(--ibm-gold);
   
   /* Opacity utilities */
   --opacity-hover: 0.85;
   --opacity-disabled: 0.4;
   
-  /* Border Radius - large, organic curves */
-  --radius-sm: 8px;
-  --radius-md: 16px;
-  --radius-lg: 24px;
-  --radius-xl: 32px;
+  /* Border Radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
   --radius-full: 9999px;
   
-  /* Shadows - soft, diffused, physical */
-  --shadow-sm: 0 1px 2px rgba(26, 25, 24, 0.04),
-               0 1px 3px rgba(26, 25, 24, 0.02);
-  --shadow-md: 0 4px 6px -2px rgba(26, 25, 24, 0.04),
-               0 8px 16px -4px rgba(26, 25, 24, 0.06);
-  --shadow-lg: 0 12px 24px -6px rgba(26, 25, 24, 0.06),
-               0 20px 40px -12px rgba(26, 25, 24, 0.08);
-  --shadow-xl: 0 24px 48px -8px rgba(26, 25, 24, 0.08),
-               0 40px 64px -16px rgba(26, 25, 24, 0.10);
-  --shadow-inner: inset 0 2px 4px rgba(26, 25, 24, 0.04);
-  --shadow-pressed: inset 0 2px 4px rgba(26, 25, 24, 0.08);
+  /* Shadows - high contrast, bold */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.12);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.14);
+  --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.16);
+  --shadow-xl: 0 16px 32px rgba(0, 0, 0, 0.20);
+  --shadow-inner: inset 0 2px 4px rgba(0, 0, 0, 0.08);
+  --shadow-pressed: inset 0 2px 4px rgba(0, 0, 0, 0.12);
   
-  /* Spacing - generous, modular */
+  /* Spacing */
   --space-1: 4px;
   --space-2: 8px;
   --space-3: 12px;
@@ -86,7 +114,7 @@
   --space-16: 64px;
   --space-20: 80px;
   
-  /* Typography - clean, technical undertones */
+  /* Typography */
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-mono: 'JetBrains Mono', 'SF Mono', Monaco, monospace;
   
@@ -114,20 +142,20 @@
   --tracking-wide: 0.05em;
   --tracking-wider: 0.1em;
   
-  /* Transitions - smooth, deliberate */
+  /* Transitions */
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
   --ease-in-out-sine: cubic-bezier(0.37, 0, 0.63, 1);
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
   
   --duration-fast: 150ms;
-  --duration-normal: 300ms;
-  --duration-slow: 500ms;
-  --duration-slower: 700ms;
+  --duration-normal: 200ms;
+  --duration-slow: 300ms;
+  --duration-slower: 400ms;
   
   /* Layout */
   --max-width: 900px;
-  --border-subtle: 1px solid var(--surface-10);
+  --border-subtle: 1px solid var(--ibm-gray-20);
 }
 
 /* --------------------------------------------------------------------------
@@ -165,16 +193,16 @@ body {
   }
 }
 
-/* Selection styling */
+/* Selection styling - IBM Blue */
 ::selection {
-  background: var(--accent-soft);
-  color: var(--surface-90);
+  background: var(--ibm-blue);
+  color: var(--ibm-white);
 }
 
-/* Focus styles - soft glow */
+/* Focus styles - bold IBM blue */
 :focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 3px;
+  outline: 3px solid var(--ibm-blue);
+  outline-offset: 2px;
 }
 
 /* --------------------------------------------------------------------------
@@ -208,12 +236,12 @@ h4 {
 }
 
 p {
-  color: var(--surface-50);
+  color: var(--surface-60);
   line-height: var(--leading-relaxed);
 }
 
 .text-muted {
-  color: var(--surface-40);
+  color: var(--surface-50);
 }
 
 .text-label {
@@ -221,14 +249,14 @@ p {
   font-weight: var(--font-semibold);
   text-transform: uppercase;
   letter-spacing: var(--tracking-wider);
-  color: var(--surface-30);
+  color: var(--surface-50);
 }
 
 /* --------------------------------------------------------------------------
    4. LAYOUT COMPONENTS
    -------------------------------------------------------------------------- */
 
-/* Container - floating card aesthetic */
+/* Container */
 .container {
   max-width: var(--max-width);
   margin: 0 auto;
@@ -237,9 +265,10 @@ p {
   box-shadow: var(--shadow-lg);
   overflow: hidden;
   position: relative;
+  border: 1px solid var(--surface-10);
 }
 
-/* Fluid section dividers */
+/* Section dividers */
 .section {
   padding: var(--space-10) var(--space-8);
   position: relative;
@@ -252,7 +281,7 @@ p {
   left: var(--space-8);
   right: var(--space-8);
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--surface-10) 20%, var(--surface-10) 80%, transparent);
+  background: var(--surface-20);
 }
 
 @media (max-width: 640px) {
@@ -266,9 +295,9 @@ p {
   }
 }
 
-/* Header - soft industrial feel */
+/* Header - Bold IBM Blue */
 .page-header {
-  background: var(--bg-secondary);
+  background: var(--ibm-blue);
   padding: var(--space-12) var(--space-8);
   text-align: center;
   position: relative;
@@ -278,14 +307,11 @@ p {
 .page-header::before {
   content: '';
   position: absolute;
-  top: -50%;
-  left: -50%;
-  right: -50%;
-  bottom: -50%;
-  background: 
-    radial-gradient(ellipse 80% 50% at 50% -20%, var(--accent-soft), transparent 70%),
-    radial-gradient(ellipse 60% 40% at 80% 120%, var(--bg-tertiary), transparent 60%);
-  opacity: 0.6;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--ibm-blue);
   pointer-events: none;
 }
 
@@ -296,18 +322,19 @@ p {
   font-weight: var(--font-bold);
   letter-spacing: var(--tracking-tight);
   margin-bottom: var(--space-3);
+  color: var(--ibm-white);
 }
 
 .page-header .subtitle {
   position: relative;
   z-index: 1;
   font-size: var(--text-base);
-  color: var(--surface-40);
+  color: rgba(255, 255, 255, 0.9);
   font-weight: var(--font-regular);
 }
 
 /* --------------------------------------------------------------------------
-   5. BUTTONS - Tactile, machined aesthetic
+   5. BUTTONS - Bold, High Contrast
    -------------------------------------------------------------------------- */
 .btn {
   display: inline-flex;
@@ -317,12 +344,12 @@ p {
   padding: var(--space-3) var(--space-6);
   font-family: var(--font-sans);
   font-size: var(--text-sm);
-  font-weight: var(--font-medium);
+  font-weight: var(--font-semibold);
   letter-spacing: var(--tracking-wide);
   text-transform: uppercase;
   text-decoration: none;
   border: none;
-  border-radius: var(--radius-full);
+  border-radius: var(--radius-md);
   cursor: pointer;
   transition: 
     transform var(--duration-fast) var(--ease-spring),
@@ -332,29 +359,19 @@ p {
   overflow: hidden;
 }
 
-.btn::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(255,255,255,0.12) 0%, transparent 50%);
-  pointer-events: none;
-}
-
 .btn:active {
   transform: scale(0.97) translateY(1px);
 }
 
-/* Primary button - soft filled */
+/* Primary button - IBM Black */
 .btn-primary {
-  background: var(--surface-90);
-  color: var(--bg-elevated);
-  box-shadow: 
-    var(--shadow-sm),
-    inset 0 1px 0 rgba(255,255,255,0.1);
+  background: var(--ibm-black);
+  color: var(--ibm-white);
+  box-shadow: var(--shadow-sm);
 }
 
 .btn-primary:hover {
-  background: var(--surface-100);
+  background: var(--surface-80);
   box-shadow: var(--shadow-md);
   transform: translateY(-1px);
 }
@@ -363,28 +380,28 @@ p {
   box-shadow: var(--shadow-pressed);
 }
 
-/* Secondary button - outlined */
+/* Secondary button - White with bold border */
 .btn-secondary {
-  background: transparent;
-  color: var(--surface-70);
-  box-shadow: inset 0 0 0 1.5px var(--surface-15);
+  background: var(--ibm-white);
+  color: var(--surface-80);
+  box-shadow: inset 0 0 0 2px var(--surface-80);
 }
 
 .btn-secondary:hover {
-  background: var(--bg-secondary);
-  color: var(--surface-90);
-  box-shadow: inset 0 0 0 1.5px var(--surface-20);
+  background: var(--surface-05);
+  color: var(--surface-100);
+  box-shadow: inset 0 0 0 2px var(--surface-100);
 }
 
-/* Accent button */
+/* Accent button - IBM Magenta */
 .btn-accent {
-  background: var(--accent);
-  color: var(--bg-elevated);
+  background: var(--ibm-magenta);
+  color: var(--ibm-white);
   box-shadow: var(--shadow-sm);
 }
 
 .btn-accent:hover {
-  background: var(--accent-hover);
+  background: #b91d6b;
   box-shadow: var(--shadow-md);
   transform: translateY(-1px);
 }
@@ -410,7 +427,7 @@ p {
 }
 
 /* --------------------------------------------------------------------------
-   6. INPUTS - Soft, physical form fields
+   6. INPUTS - Clean, Accessible
    -------------------------------------------------------------------------- */
 .input {
   width: 100%;
@@ -419,8 +436,8 @@ p {
   font-size: var(--text-base);
   color: var(--surface-90);
   background: var(--bg-primary);
-  border: 1.5px solid var(--surface-10);
-  border-radius: var(--radius-lg);
+  border: 2px solid var(--surface-20);
+  border-radius: var(--radius-md);
   transition: 
     border-color var(--duration-fast) var(--ease-out-quart),
     box-shadow var(--duration-fast) var(--ease-out-quart),
@@ -428,17 +445,17 @@ p {
 }
 
 .input:hover {
-  border-color: var(--surface-15);
+  border-color: var(--surface-40);
 }
 
 .input:focus {
   outline: none;
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px var(--accent-soft);
+  border-color: var(--ibm-blue);
+  box-shadow: 0 0 0 3px rgba(100, 143, 255, 0.25);
 }
 
 .input::placeholder {
-  color: var(--surface-30);
+  color: var(--surface-40);
 }
 
 /* Input with icon */
@@ -455,18 +472,18 @@ p {
   left: var(--space-4);
   top: 50%;
   transform: translateY(-50%);
-  color: var(--surface-30);
+  color: var(--surface-40);
   pointer-events: none;
 }
 
 /* --------------------------------------------------------------------------
-   7. CARDS - Floating, tactile surfaces
+   7. CARDS - Clean, Bold
    -------------------------------------------------------------------------- */
 .card {
   background: var(--bg-elevated);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);
-  border: 1px solid var(--surface-05);
+  border: 1px solid var(--surface-10);
   overflow: hidden;
   transition: 
     box-shadow var(--duration-normal) var(--ease-out-quart),
@@ -480,7 +497,7 @@ p {
 .card-header {
   padding: var(--space-5) var(--space-6);
   background: var(--bg-secondary);
-  border-bottom: 1px solid var(--surface-05);
+  border-bottom: 1px solid var(--surface-10);
 }
 
 .card-body {
@@ -490,7 +507,7 @@ p {
 .card-footer {
   padding: var(--space-4) var(--space-6);
   background: var(--bg-secondary);
-  border-top: 1px solid var(--surface-05);
+  border-top: 1px solid var(--surface-10);
 }
 
 /* Elevated card */
@@ -520,7 +537,7 @@ p {
   gap: var(--space-2);
   padding: var(--space-2) var(--space-2) var(--space-2) var(--space-4);
   background: var(--surface-90);
-  color: var(--bg-elevated);
+  color: var(--ibm-white);
   font-size: var(--text-sm);
   font-weight: var(--font-medium);
   border-radius: var(--radius-full);
@@ -553,7 +570,7 @@ p {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(255,255,255,0.15);
+  background: rgba(255, 255, 255, 0.2);
   border: none;
   border-radius: var(--radius-full);
   color: inherit;
@@ -565,7 +582,7 @@ p {
 }
 
 .player-tag .remove-btn:hover {
-  background: var(--error);
+  background: var(--ibm-orange);
   transform: scale(1.1);
 }
 
@@ -575,7 +592,7 @@ p {
   border-radius: var(--radius-lg);
   padding: var(--space-5);
   box-shadow: var(--shadow-sm);
-  border: 1px solid var(--surface-05);
+  border: 2px solid var(--surface-10);
   transition: 
     box-shadow var(--duration-normal) var(--ease-out-quart),
     border-color var(--duration-fast);
@@ -583,7 +600,7 @@ p {
 
 .player-input-card:hover {
   box-shadow: var(--shadow-md);
-  border-color: var(--surface-10);
+  border-color: var(--ibm-blue);
 }
 
 .player-input-card h4 {
@@ -593,13 +610,13 @@ p {
 }
 
 /* --------------------------------------------------------------------------
-   9. LEADERBOARD - Dark, premium panel
+   9. LEADERBOARD - Bold, High Contrast
    -------------------------------------------------------------------------- */
 .leaderboard {
   background: var(--surface-90);
   border-radius: var(--radius-xl);
   padding: var(--space-6);
-  color: var(--bg-elevated);
+  color: var(--ibm-white);
   position: relative;
   overflow: hidden;
 }
@@ -610,8 +627,8 @@ p {
   top: 0;
   left: 0;
   right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  height: 4px;
+  background: var(--ibm-gold);
 }
 
 .leaderboard h3 {
@@ -627,7 +644,7 @@ p {
   align-items: center;
   gap: var(--space-4);
   padding: var(--space-4) var(--space-5);
-  background: rgba(255,255,255,0.06);
+  background: rgba(255, 255, 255, 0.08);
   border-radius: var(--radius-lg);
   margin-bottom: var(--space-3);
   transition: 
@@ -640,20 +657,20 @@ p {
 }
 
 .leaderboard-item:hover {
-  background: rgba(255,255,255,0.1);
+  background: rgba(255, 255, 255, 0.12);
   transform: translateX(4px);
 }
 
 .leaderboard-rank {
   font-size: var(--text-xl);
   font-weight: var(--font-bold);
-  color: var(--surface-50);
+  color: var(--surface-40);
   min-width: 32px;
   text-align: center;
 }
 
 .leaderboard-item:first-child .leaderboard-rank {
-  color: var(--accent);
+  color: var(--ibm-gold);
 }
 
 .leaderboard-name {
@@ -666,11 +683,11 @@ p {
   font-size: var(--text-lg);
   font-weight: var(--font-semibold);
   font-family: var(--font-mono);
-  color: var(--bg-elevated);
+  color: var(--ibm-white);
 }
 
 /* --------------------------------------------------------------------------
-   10. RULES SECTION - Information architecture
+   10. RULES SECTION - Bold IBM Colors
    -------------------------------------------------------------------------- */
 .rules-grid {
   display: grid;
@@ -682,40 +699,45 @@ p {
   background: var(--bg-elevated);
   border-radius: var(--radius-lg);
   padding: var(--space-5);
-  border: 1px solid var(--surface-05);
+  border: 2px solid var(--surface-10);
   box-shadow: var(--shadow-sm);
   transition: 
     box-shadow var(--duration-normal),
-    transform var(--duration-fast) var(--ease-spring);
+    transform var(--duration-fast) var(--ease-spring),
+    border-color var(--duration-fast);
 }
 
 .rule-card:hover {
   box-shadow: var(--shadow-md);
   transform: translateY(-2px);
+  border-color: var(--ibm-blue);
 }
 
 .rule-card-number {
-  width: 40px;
-  height: 40px;
+  width: 48px;
+  height: 48px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--accent-muted);
+  background: var(--ibm-gray-05);
   color: var(--surface-70);
   font-weight: var(--font-bold);
   font-size: var(--text-lg);
   border-radius: var(--radius-md);
   margin-bottom: var(--space-3);
+  border: 2px solid var(--surface-10);
 }
 
 .rule-card.special .rule-card-number {
-  background: var(--warning-soft);
-  color: var(--warning);
+  background: var(--ibm-gold);
+  color: var(--ibm-black);
+  border-color: var(--ibm-gold);
 }
 
 .rule-card.power .rule-card-number {
-  background: var(--success-soft);
-  color: var(--success);
+  background: var(--ibm-blue);
+  color: var(--ibm-white);
+  border-color: var(--ibm-blue);
 }
 
 .rule-card h5 {
@@ -727,7 +749,7 @@ p {
 
 .rule-card p {
   font-size: var(--text-sm);
-  color: var(--surface-40);
+  color: var(--surface-50);
   line-height: var(--leading-relaxed);
 }
 
@@ -743,7 +765,7 @@ p {
   border-radius: var(--radius-lg);
   margin-bottom: var(--space-3);
   box-shadow: var(--shadow-sm);
-  border: 1px solid var(--surface-05);
+  border: 2px solid var(--surface-10);
   transition: 
     box-shadow var(--duration-normal),
     transform var(--duration-fast);
@@ -775,7 +797,7 @@ p {
 }
 
 .history-details {
-  color: var(--surface-40);
+  color: var(--surface-50);
   font-size: var(--text-sm);
 }
 
@@ -801,33 +823,31 @@ p {
   border-radius: var(--radius-xl);
   padding: var(--space-6);
   box-shadow: var(--shadow-sm);
-  border: 1px solid var(--surface-05);
+  border: 2px solid var(--surface-10);
 }
 
 .graph-container h2 {
   font-size: var(--text-xs);
   text-transform: uppercase;
   letter-spacing: var(--tracking-wider);
-  color: var(--surface-30);
+  color: var(--surface-50);
   margin-bottom: var(--space-5);
 }
 
 #scoreGraph {
   width: 100%;
   height: 320px;
-  background: var(--bg-primary);
+  background: var(--bg-secondary);
   border-radius: var(--radius-lg);
 }
 
 /* --------------------------------------------------------------------------
-   13. MODAL - Overlay with blur
+   13. MODAL - High Contrast
    -------------------------------------------------------------------------- */
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(26, 25, 24, 0.6);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background: rgba(0, 0, 0, 0.8);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -855,6 +875,7 @@ p {
   overflow: hidden;
   transform: scale(0.9) translateY(20px);
   transition: transform var(--duration-slow) var(--ease-out-expo);
+  border: 2px solid var(--surface-10);
 }
 
 .modal-overlay.active .modal-content {
@@ -877,11 +898,12 @@ p {
   justify-content: center;
 }
 
-/* Winner modal specific */
+/* Winner modal specific - IBM Gold */
 .winner-crown {
   font-size: var(--text-4xl);
   margin-bottom: var(--space-4);
   animation: crownFloat 3s ease-in-out infinite;
+  color: var(--ibm-gold);
 }
 
 @keyframes crownFloat {
@@ -893,7 +915,7 @@ p {
   font-size: var(--text-xs);
   text-transform: uppercase;
   letter-spacing: var(--tracking-wider);
-  color: var(--surface-30);
+  color: var(--surface-50);
 }
 
 .winner-name {
@@ -906,7 +928,7 @@ p {
 .winner-score {
   font-size: var(--text-xl);
   font-weight: var(--font-semibold);
-  color: var(--success);
+  color: var(--ibm-gold);
   font-family: var(--font-mono);
 }
 
@@ -915,6 +937,7 @@ p {
   border-radius: var(--radius-lg);
   padding: var(--space-4);
   margin: var(--space-6) 0;
+  border: 2px solid var(--surface-10);
 }
 
 .winner-rank-item {
@@ -931,7 +954,8 @@ p {
 }
 
 .winner-rank-item.winner {
-  background: var(--success-soft);
+  background: rgba(255, 176, 0, 0.15);
+  border: 2px solid var(--ibm-gold);
 }
 
 .winner-rank-position {
@@ -941,7 +965,7 @@ p {
 }
 
 .winner-rank-item.winner .winner-rank-position {
-  color: var(--success);
+  color: var(--ibm-gold);
 }
 
 .winner-rank-player {
@@ -973,7 +997,7 @@ p {
 .empty-state {
   text-align: center;
   padding: var(--space-10);
-  color: var(--surface-30);
+  color: var(--surface-40);
 }
 
 .empty-state-icon {
@@ -982,31 +1006,31 @@ p {
   opacity: 0.5;
 }
 
-/* Badge */
+/* Badge - High Contrast */
 .badge {
   display: inline-flex;
   align-items: center;
   padding: var(--space-1) var(--space-2);
   font-size: var(--text-xs);
-  font-weight: var(--font-semibold);
+  font-weight: var(--font-bold);
   text-transform: uppercase;
   letter-spacing: var(--tracking-wide);
-  border-radius: var(--radius-full);
+  border-radius: var(--radius-sm);
 }
 
 .badge-kamikaze {
-  background: var(--warning-soft);
-  color: var(--warning);
+  background: var(--ibm-gold);
+  color: var(--ibm-black);
 }
 
 .badge-penalty {
-  background: var(--error-soft);
-  color: var(--error);
+  background: var(--error);
+  color: var(--ibm-white);
 }
 
 .badge-bonus {
-  background: var(--success-soft);
-  color: var(--success);
+  background: var(--ibm-blue);
+  color: var(--ibm-white);
 }
 
 /* Checkbox */
@@ -1015,20 +1039,25 @@ p {
   align-items: center;
   gap: var(--space-3);
   padding: var(--space-4);
-  background: var(--bg-primary);
+  background: var(--bg-secondary);
   border-radius: var(--radius-lg);
   cursor: pointer;
   transition: background-color var(--duration-fast);
+  border: 2px solid transparent;
 }
 
 .checkbox-wrapper:hover {
-  background: var(--bg-secondary);
+  background: var(--surface-10);
+}
+
+.checkbox-wrapper:focus-within {
+  border-color: var(--ibm-blue);
 }
 
 .checkbox-wrapper input[type="checkbox"] {
   width: 20px;
   height: 20px;
-  accent-color: var(--accent);
+  accent-color: var(--ibm-blue);
   cursor: pointer;
 }
 
@@ -1038,24 +1067,25 @@ p {
   cursor: pointer;
 }
 
-/* Game ended banner */
+/* Game ended banner - IBM Gold */
 .game-ended-banner {
-  background: var(--warning-soft);
-  color: var(--warning);
+  background: var(--ibm-gold);
+  color: var(--ibm-black);
   padding: var(--space-5);
   border-radius: var(--radius-lg);
   text-align: center;
-  font-weight: var(--font-semibold);
+  font-weight: var(--font-bold);
   font-size: var(--text-sm);
   text-transform: uppercase;
   letter-spacing: var(--tracking-wide);
   margin-bottom: var(--space-6);
   animation: bannerPulse 2s ease-in-out infinite;
+  border: 2px solid var(--ibm-black);
 }
 
 @keyframes bannerPulse {
   0%, 100% { opacity: 1; }
-  50% { opacity: 0.8; }
+  50% { opacity: 0.85; }
 }
 
 /* Back link */
@@ -1063,7 +1093,7 @@ p {
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
-  color: var(--surface-40);
+  color: rgba(255, 255, 255, 0.8);
   font-size: var(--text-sm);
   font-weight: var(--font-medium);
   text-decoration: none;
@@ -1071,7 +1101,7 @@ p {
 }
 
 .back-link:hover {
-  color: var(--surface-90);
+  color: var(--ibm-white);
 }
 
 /* Confetti canvas */
@@ -1198,6 +1228,14 @@ p {
   .btn-secondary {
     border: 2px solid currentColor;
   }
+  
+  .card,
+  .player-input-card,
+  .graph-container,
+  .modal-content,
+  .winner-rankings {
+    border-width: 3px;
+  }
 }
 
 /* Focus visible styles for keyboard navigation */
@@ -1254,7 +1292,7 @@ p {
   font-size: var(--text-sm);
   text-transform: uppercase;
   letter-spacing: var(--tracking-wider);
-  color: var(--surface-40);
+  color: var(--surface-50);
   font-weight: var(--font-medium);
 }
 
@@ -1280,7 +1318,7 @@ p {
   font-size: var(--text-xs);
   text-transform: uppercase;
   letter-spacing: var(--tracking-wider);
-  color: var(--surface-30);
+  color: var(--surface-50);
   margin-bottom: var(--space-5);
 }
 
@@ -1307,7 +1345,7 @@ p {
   font-weight: var(--font-semibold);
   text-transform: uppercase;
   letter-spacing: var(--tracking-wide);
-  color: var(--surface-40);
+  color: var(--surface-50);
 }
 
 .total-score-display {
@@ -1319,15 +1357,16 @@ p {
   font-weight: var(--font-medium);
   color: var(--surface-70);
   font-size: var(--text-sm);
+  border: 2px solid transparent;
 }
 
 .total-score-display .exact-100 {
-  color: var(--success);
+  color: var(--ibm-blue);
   font-weight: var(--font-bold);
 }
 
 .total-score-display .over-100 {
-  color: var(--error);
+  color: var(--ibm-orange);
   font-weight: var(--font-bold);
 }
 
@@ -1336,7 +1375,7 @@ p {
   font-size: var(--text-xs);
   text-transform: uppercase;
   letter-spacing: var(--tracking-wider);
-  color: var(--surface-30);
+  color: var(--surface-50);
   margin-bottom: var(--space-5);
 }
 
@@ -1356,16 +1395,16 @@ p {
 }
 
 .player-score-display.near-100 {
-  color: var(--warning);
+  color: var(--ibm-gold);
 }
 
 .player-score-display .exact-100 {
-  color: var(--success);
+  color: var(--ibm-blue);
   font-weight: var(--font-bold);
 }
 
 .player-score-display .over-100 {
-  color: var(--error);
+  color: var(--ibm-orange);
   font-weight: var(--font-bold);
 }
 
@@ -1382,7 +1421,7 @@ p {
 }
 
 .container {
-  animation: pageLoad 0.8s var(--ease-out-expo);
+  animation: pageLoad 0.6s var(--ease-out-expo);
 }
 
 /* Smooth scroll */
