@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cabo Score Tracker</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Cabo-specific additional styles */
+        .cabo-info {
+            background: linear-gradient(135deg, var(--ibm-purple-dark) 0%, var(--ibm-magenta-dark) 100%);
+            color: var(--neutral-white);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .cabo-info h3 {
+            color: var(--neutral-white);
+            margin-bottom: 10px;
+        }
+        
+        .cabo-info ul {
+            margin-left: 20px;
+            line-height: 1.6;
+        }
+        
+        .cabo-info li {
+            margin-bottom: 5px;
+        }
+        
+        .scoring-rules {
+            background: var(--neutral-gray-10);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 1px solid var(--neutral-gray-20);
+        }
+        
+        .scoring-rules h4 {
+            color: var(--ibm-purple-dark);
+            margin-bottom: 10px;
+        }
+        
+        .scoring-rules ul {
+            margin-left: 20px;
+            line-height: 1.6;
+        }
+        
+        .card-values {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .card-type {
+            background: var(--neutral-white);
+            padding: 10px;
+            border-radius: 4px;
+            border-left: 4px solid var(--ibm-blue);
+        }
+        
+        .card-type.choice {
+            border-left-color: var(--ibm-magenta);
+        }
+        
+        .card-type.special {
+            border-left-color: var(--ibm-orange);
+        }
+        
+        .cabo-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 10px;
+            padding: 10px;
+            background: var(--neutral-gray-10);
+            border-radius: 4px;
+        }
+        
+        .cabo-checkbox input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+        
+        .cabo-checkbox label {
+            font-weight: 600;
+            color: var(--ibm-magenta-dark);
+            cursor: pointer;
+        }
+        
+        .kamikaze-badge {
+            background: linear-gradient(135deg, var(--ibm-orange) 0%, var(--ibm-yellow) 100%);
+            color: var(--neutral-white);
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.75em;
+            font-weight: bold;
+            margin-left: 8px;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+        }
+        
+        .penalty-badge {
+            background: var(--error-color);
+            color: var(--neutral-white);
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.75em;
+            font-weight: bold;
+            margin-left: 8px;
+        }
+        
+        .bonus-badge {
+            background: var(--success-color);
+            color: var(--neutral-white);
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.75em;
+            font-weight: bold;
+            margin-left: 8px;
+        }
+        
+        .round-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .total-score-display {
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-top: 8px;
+            padding: 8px;
+            background: var(--neutral-gray-10);
+            border-radius: 4px;
+            text-align: center;
+        }
+        
+        .exact-100 {
+            color: var(--ibm-blue-dark);
+        }
+        
+        .over-100 {
+            color: var(--error-color);
+            font-weight: bold;
+        }
+        
+        .game-ended-banner {
+            background: linear-gradient(135deg, var(--ibm-yellow) 0%, var(--ibm-orange) 100%);
+            color: var(--neutral-white);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.2em;
+            font-weight: bold;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div style="text-align: center; margin-bottom: 15px;">
+            <a href="index.html" style="color: var(--ibm-blue-dark); text-decoration: none; font-weight: 600;">← Back to Games</a>
+        </div>
+        <h1>🃏 Cabo Score Tracker</h1>
+        
+        <div class="cabo-info">
+            <h3>📋 Game Rules Summary</h3>
+            <ul>
+                <li>Goal: Have the <strong>lowest score</strong> when someone exceeds 100 points</li>
+                <li>Each round: Winner gets 0 points, others get their hand value</li>
+                <li><strong>Calling Cabo:</strong> If you call Cabo but don't win → +5 penalty points</li>
+                <li><strong>Kamikaze:</strong> End with two 12s + both 13s → You get 0, everyone else gets 50</li>
+                <li><strong>Exactly 100:</strong> Score drops to 50</li>
+                <li>Game ends when any player exceeds 100 points</li>
+            </ul>
+        </div>
+
+        <div class="scoring-rules">
+            <h4>🎴 Card Values</h4>
+            <div class="card-values">
+                <div class="card-type">
+                    <strong>Number Cards (0-6):</strong> Face value
+                </div>
+                <div class="card-type choice">
+                    <strong>Peek (7-8):</strong> 7-8 points
+                </div>
+                <div class="card-type choice">
+                    <strong>Spy (9-10):</strong> 9-10 points
+                </div>
+                <div class="card-type choice">
+                    <strong>Swap (11-12):</strong> 11-12 points
+                </div>
+                <div class="card-type special">
+                    <strong>Cabo (13):</strong> 13 points
+                </div>
+            </div>
+        </div>
+        
+        <div id="setupSection" class="setup-section">
+            <h2>Setup Players</h2>
+            <div class="player-setup">
+                <input type="text" id="playerName" placeholder="Player name" maxlength="20">
+                <button id="addPlayer" class="btn-primary">Add Player</button>
+            </div>
+            <div id="playerList" class="player-list"></div>
+            <button id="startGame" class="btn-start" style="display: none;">Start Game</button>
+        </div>
+
+        <div id="gameSection" class="game-section" style="display: none;">
+            <div id="gameEndedBanner" class="game-ended-banner" style="display: none;">
+                🎉 GAME OVER! Check the final rankings below 🎉
+            </div>
+            
+            <div class="round-info">
+                <h2>Round <span id="currentRound">1</span></h2>
+                <div>
+                    <button id="nextRound" class="btn-primary">Finish Round</button>
+                    <button id="resetGame" class="btn-secondary">New Game</button>
+                </div>
+            </div>
+
+            <div class="leaderboard">
+                <h3>🏆 Leaderboard</h3>
+                <div id="leaderboardList"></div>
+            </div>
+
+            <div class="input-section">
+                <h3>Enter Scores for Round <span id="inputRoundNumber">1</span></h3>
+                <div id="playerInputs"></div>
+            </div>
+
+            <div class="graph-container">
+                <h2>Score Progress</h2>
+                <canvas id="scoreGraph"></canvas>
+            </div>
+
+            <div class="history">
+                <h3>Round History</h3>
+                <div id="historyList"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Winner Modal -->
+    <div id="winnerModal" class="winner-modal" style="display: none;">
+        <div class="winner-modal-content">
+            <div class="winner-crown">👑</div>
+            <h2 class="winner-title">GAME OVER!</h2>
+            <div class="winner-announcement">
+                <span class="winner-label">WINNER</span>
+                <span id="winnerName" class="winner-name"></span>
+                <span id="winnerScore" class="winner-score"></span>
+            </div>
+            <div class="winner-rankings" id="winnerRankings"></div>
+            <button id="closeWinnerModal" class="btn-primary">Play Again</button>
+        </div>
+    </div>
+
+    <!-- Confetti Canvas -->
+    <canvas id="confettiCanvas" class="confetti-canvas"></canvas>
+
+    <script src="cabo.js"></script>
+</body>
+</html>

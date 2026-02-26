@@ -1,0 +1,13 @@
+{
+  "name": "cabo-score-tracker",
+  "version": "1.0.0",
+  "description": "A score tracker for the Cabo card game",
+  "scripts": {
+    "build": "bun build cabo.ts --outfile cabo.js",
+    "dev": "bun build cabo.ts --outfile cabo.js --watch",
+    "serve": "bunx serve ."
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  }
+}
