@@ -14,13 +14,13 @@ interface RoundData {
     winnerId: number;
 }
 
-// IBM Colorblind-safe colors
+// BRUTALIST TECH AESTHETIC COLORS
 const playerColors = [
-    '#648fff', // Blue
-    '#785ef0', // Purple
-    '#dc267f', // Magenta
-    '#fe6100', // Orange
-    '#ffb000', // Yellow
+    '#0A0A0A', // Black - Player 1
+    '#FF4D4D', // Red Coral - Player 2
+    '#50C878', // Green - Player 3
+    '#2d2d2d', // Dark Gray - Player 4
+    '#D9D936', // Dark Yellow - Player 5
 ];
 
 class CaboGame {
@@ -401,7 +401,7 @@ class CaboGame {
         const yScale = height / Math.max(maxScore, 50);
 
         // Draw axes
-        ctx.strokeStyle = '#e0e0e0';
+        ctx.strokeStyle = '#E8E4D9'; // Cream dark
         ctx.lineWidth = 1;
         ctx.beginPath();
         ctx.moveTo(padding, padding);
@@ -488,7 +488,7 @@ class CaboGame {
         this.players.forEach(player => {
             ctx.fillStyle = player.color;
             ctx.fillRect(legendX, legendY - 8, 12, 12);
-            ctx.fillStyle = '#161616';
+            ctx.fillStyle = '#1a1a1a'; // Gray 90
             ctx.font = '11px sans-serif';
             ctx.textAlign = 'left';
             ctx.fillText(player.name, legendX + 16, legendY + 2);
@@ -529,7 +529,7 @@ class CaboGame {
         canvas.height = window.innerHeight;
 
         const particles: { x: number; y: number; vx: number; vy: number; color: string; size: number }[] = [];
-        const colors = ['#648fff', '#785ef0', '#dc267f', '#fe6100', '#ffb000'];
+        const colors = ['#0A0A0A', '#FF4D4D', '#50C878', '#2d2d2d', '#F0F040', '#D9D936'];
 
         for (let i = 0; i < 150; i++) {
             particles.push({

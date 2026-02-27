@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cabo Score Tracker</title>
+    <title>CABO // SCORE TRACKER</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -14,66 +14,72 @@
         <!-- Header Section -->
         <header class="page-header">
             <a href="index.html" class="back-link" style="position: absolute; top: var(--space-5); left: var(--space-6);">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" stroke-linejoin="miter">
                     <path d="M19 12H5M12 19l-7-7 7-7"/>
                 </svg>
-                Back to Games
+                < BACK
             </a>
-            <h1>Cabo</h1>
-            <p class="subtitle">Precision score tracking for the card game</p>
+            <div class="bar-chart-deco" style="position: absolute; bottom: 20px; left: var(--space-6); opacity: 0.3;">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+            <h1>CABO</h1>
+            <p class="subtitle">// PRECISION SCORE TRACKING FOR THE CARD GAME</p>
         </header>
 
         <!-- Game Rules Section -->
         <section class="section">
-            <h2 style="font-size: var(--text-xs); text-transform: uppercase; letter-spacing: var(--tracking-wider); color: var(--surface-30); margin-bottom: var(--space-5);">Quick Reference</h2>
+            <h2 style="font-size: var(--text-xs); letter-spacing: var(--tracking-wider); color: var(--gray-50); margin-bottom: var(--space-5); font-family: var(--font-mono);">QUICK REFERENCE //</h2>
             
             <div class="rules-grid">
                 <div class="rule-card">
-                    <div class="rule-card-number">0</div>
-                    <h5>Goal</h5>
+                    <div class="rule-card-number">00</div>
+                    <h5>GOAL</h5>
                     <p>Lowest score wins when someone exceeds 100 points</p>
                 </div>
                 <div class="rule-card power">
                     <div class="rule-card-number">7-8</div>
-                    <h5>Peek</h5>
+                    <h5>PEEK</h5>
                     <p>Look at one of your own cards</p>
                 </div>
                 <div class="rule-card power">
                     <div class="rule-card-number">9-10</div>
-                    <h5>Spy</h5>
+                    <h5>SPY</h5>
                     <p>Look at another player's card</p>
                 </div>
                 <div class="rule-card power">
                     <div class="rule-card-number">11-12</div>
-                    <h5>Swap</h5>
+                    <h5>SWAP</h5>
                     <p>Exchange cards with another player</p>
                 </div>
                 <div class="rule-card special">
-                    <div class="rule-card-number">End</div>
-                    <h5>Cabo</h5>
+                    <div class="rule-card-number">END</div>
+                    <h5>CABO</h5>
                     <p>Call when you think you have the lowest hand</p>
                 </div>
                 <div class="rule-card special">
                     <div class="rule-card-number">★</div>
-                    <h5>Kamikaze</h5>
+                    <h5>KAMIKAZE</h5>
                     <p>Two 12s + both 13s = 0 points, others get 50</p>
                 </div>
             </div>
 
             <div class="card" style="margin-top: var(--space-6);">
                 <div class="card-body">
-                    <div style="display: flex; flex-wrap: wrap; gap: var(--space-6); justify-content: center; font-size: var(--text-sm); color: var(--surface-50);">
+                    <div style="display: flex; flex-wrap: wrap; gap: var(--space-6); justify-content: center; font-size: var(--text-xs); color: var(--gray-60); font-family: var(--font-mono); text-transform: uppercase; letter-spacing: var(--tracking-mono);">
                         <div style="display: flex; align-items: center; gap: var(--space-2);">
-                            <span style="display: inline-block; width: 8px; height: 8px; background: var(--warning); border-radius: 50%;"></span>
-                            Cabo penalty: +10 points if not lowest
+                            <span style="display: inline-block; width: 8px; height: 8px; background: var(--red-coral); border: 1px solid var(--black);"></span>
+                            CABO PENALTY: +10 POINTS IF NOT LOWEST
                         </div>
                         <div style="display: flex; align-items: center; gap: var(--space-2);">
-                            <span style="display: inline-block; width: 8px; height: 8px; background: var(--success); border-radius: 50%;"></span>
-                            Exactly 100: Score drops to 50
+                            <span style="display: inline-block; width: 8px; height: 8px; background: var(--green-bright); border: 1px solid var(--black);"></span>
+                            EXACTLY 100: SCORE DROPS TO 50
                         </div>
                         <div style="display: flex; align-items: center; gap: var(--space-2);">
-                            <span style="display: inline-block; width: 8px; height: 8px; background: var(--surface-30); border-radius: 50%;"></span>
-                            Number cards: Face value (0-6)
+                            <span style="display: inline-block; width: 8px; height: 8px; background: var(--black); border: 1px solid var(--black);"></span>
+                            NUMBER CARDS: FACE VALUE (0-6)
                         </div>
                     </div>
                 </div>
@@ -81,27 +87,34 @@
         </section>
 
         <!-- Setup Section -->
-        <section id="setupSection" class="section" style="background: var(--bg-secondary);">
+        <section id="setupSection" class="section" style="background: var(--cream);">
             <div class="setup-section">
-                <h2 style="text-align: center; margin-bottom: var(--space-2);">New Game</h2>
-                <p style="text-align: center; color: var(--surface-40); margin-bottom: var(--space-8);">Add players to begin tracking</p>
+                <div class="bar-chart-deco" style="justify-content: center; margin-bottom: var(--space-4); opacity: 0.4;">
+                    <div class="bar" style="height: 30px;"></div>
+                    <div class="bar" style="height: 50px;"></div>
+                    <div class="bar" style="height: 25px;"></div>
+                    <div class="bar" style="height: 40px;"></div>
+                    <div class="bar" style="height: 60px;"></div>
+                </div>
+                <h2 style="text-align: center; margin-bottom: var(--space-2); font-family: var(--font-mono);">NEW GAME //</h2>
+                <p style="text-align: center; color: var(--gray-50); margin-bottom: var(--space-8); font-family: var(--font-mono); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: var(--tracking-mono);">ADD PLAYERS TO BEGIN TRACKING</p>
                 
                 <div class="player-setup">
-                    <input type="text" id="playerName" class="input" placeholder="Enter player name" maxlength="20" style="max-width: 280px;">
+                    <input type="text" id="playerName" class="input" placeholder="ENTER PLAYER NAME" maxlength="20" style="max-width: 280px; text-transform: uppercase;">
                     <button id="addPlayer" class="btn btn-primary">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" stroke-linejoin="miter">
                             <line x1="12" y1="5" x2="12" y2="19"></line>
                             <line x1="5" y1="12" x2="19" y2="12"></line>
                         </svg>
-                        Add Player
+                        ADD
                     </button>
                 </div>
                 
                 <div id="playerList" class="player-list"></div>
                 
                 <button id="startGame" class="btn btn-accent btn-lg" style="display: none; margin-top: var(--space-6);">
-                    Start Game
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    START GAME
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" stroke-linejoin="miter">
                         <polyline points="9 18 15 12 9 6"></polyline>
                     </svg>
                 </button>
@@ -109,48 +122,48 @@
         </section>
 
         <!-- Game Section -->
-        <section id="gameSection" class="section" style="display: none; background: var(--bg-secondary);">
+        <section id="gameSection" class="section" style="display: none; background: var(--cream);">
             <div class="game-section">
                 <!-- Game Over Banner -->
                 <div id="gameEndedBanner" class="game-ended-banner" style="display: none;">
-                    Game Over — Check the final rankings below
+                    GAME OVER — CHECK FINAL RANKINGS
                 </div>
                 
                 <!-- Round Info -->
-                <div class="round-info" style="background: var(--bg-elevated); padding: var(--space-5) var(--space-6); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm);">
-                    <h2>Round <span id="currentRound">1</span></h2>
+                <div class="round-info">
+                    <h2>ROUND <span id="currentRound">1</span></h2>
                     <div class="round-actions">
                         <button id="nextRound" class="btn btn-primary">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" stroke-linejoin="miter">
                                 <polyline points="20 6 9 17 4 12"></polyline>
                             </svg>
-                            Finish Round
+                            FINISH ROUND
                         </button>
-                        <button id="resetGame" class="btn btn-secondary">New Game</button>
+                        <button id="resetGame" class="btn btn-secondary">NEW GAME</button>
                     </div>
                 </div>
 
                 <!-- Leaderboard -->
                 <div class="leaderboard" style="margin-bottom: var(--space-8);">
-                    <h3>Current Standings</h3>
+                    <h3>CURRENT STANDINGS //</h3>
                     <div id="leaderboardList"></div>
                 </div>
 
                 <!-- Score Input -->
                 <div class="input-section">
-                    <h3>Enter Scores — Round <span id="inputRoundNumber">1</span></h3>
+                    <h3>ENTER SCORES — ROUND <span id="inputRoundNumber">1</span> //</h3>
                     <div id="playerInputs"></div>
                 </div>
 
                 <!-- Score Graph -->
                 <div class="graph-container" style="margin-bottom: var(--space-8);">
-                    <h2>Score Progress</h2>
+                    <h2>SCORE PROGRESS //</h2>
                     <canvas id="scoreGraph"></canvas>
                 </div>
 
                 <!-- Round History -->
                 <div class="history">
-                    <h3>Round History</h3>
+                    <h3>ROUND HISTORY //</h3>
                     <div id="historyList"></div>
                 </div>
             </div>
@@ -162,7 +175,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <div class="winner-crown">★</div>
-                <p class="winner-label">Game Complete</p>
+                <p class="winner-label">GAME COMPLETE //</p>
                 <div id="winnerName" class="winner-name"></div>
                 <div id="winnerScore" class="winner-score"></div>
             </div>
@@ -170,7 +183,7 @@
                 <div class="winner-rankings" id="winnerRankings"></div>
             </div>
             <div class="modal-footer">
-                <button id="closeWinnerModal" class="btn btn-primary btn-lg">Play Again</button>
+                <button id="closeWinnerModal" class="btn btn-primary btn-lg">PLAY AGAIN</button>
             </div>
         </div>
     </div>

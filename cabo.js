@@ -1,14 +1,14 @@
 // cabo.js
-// IBM Color Blind Safe Palette Design System
-// Bold, accessible, high-contrast visual system
-// https://www.ibm.com/design/language/color/
+// BRUTALIST TECH AESTHETIC
+// High contrast, monospace, industrial design system
+// Colors: Neon Yellow, Black, Cream, Red Coral, Green
 
 const playerColors = [
-    "#648fff", // IBM Blue - Player 1
-    "#785ef0", // IBM Purple - Player 2
-    "#dc267f", // IBM Magenta - Player 3
-    "#fe6100", // IBM Orange - Player 4
-    "#ffb000"  // IBM Gold - Player 5
+    "#0A0A0A", // Black - Player 1
+    "#FF4D4D", // Red Coral - Player 2
+    "#50C878", // Green - Player 3
+    "#2d2d2d", // Dark Gray - Player 4
+    "#D9D936"  // Dark Yellow - Player 5
 ];
 
 class CaboGame {
@@ -352,7 +352,7 @@ class CaboGame {
                     <span style="color: ${player.color}; margin-right: var(--space-2);">●</span>
                     ${player.name}
                 </span>
-                <span class="leaderboard-score" style="color: ${index === 0 ? 'var(--accent)' : 'inherit'};">${player.totalScore}</span>
+                <span class="leaderboard-score" style="color: ${index === 0 ? 'var(--neon-yellow)' : 'inherit'};">${player.totalScore}</span>
             </div>
         `).join("");
     }
@@ -416,12 +416,12 @@ class CaboGame {
         const width = rect.width - 2 * padding;
         const height = rect.height - 2 * padding;
 
-        // Clear canvas
+        // Clear canvas with cream background
         ctx.clearRect(0, 0, rect.width, rect.height);
 
         // Empty state
         if (this.players.length === 0 || this.currentRound === 1) {
-            ctx.fillStyle = "#6f6f6f"; // IBM Gray 50
+            ctx.fillStyle = "#6b6b6b"; // Gray 50
             ctx.font = "14px Inter, sans-serif";
             ctx.textAlign = "center";
             ctx.fillText("Score progress will appear after round 1", rect.width / 2, rect.height / 2);
@@ -439,7 +439,7 @@ class CaboGame {
         const yScale = height / Math.max(maxScore, 50);
 
         // Draw grid
-        ctx.strokeStyle = "#e0e0e0"; // IBM Gray 10
+        ctx.strokeStyle = "#E8E4D9"; // Cream dark
         ctx.lineWidth = 1;
 
         // Horizontal grid lines
@@ -452,17 +452,17 @@ class CaboGame {
                 ctx.lineTo(rect.width - padding, y);
                 ctx.stroke();
 
-                ctx.fillStyle = "#6f6f6f"; // IBM Gray 50
+                ctx.fillStyle = "#6b6b6b"; // Gray 50
                 ctx.font = "11px JetBrains Mono, monospace";
                 ctx.textAlign = "right";
                 ctx.fillText(score.toString(), padding - 8, y + 4);
             }
         }
 
-        // 100 threshold line - IBM Orange for high visibility
+        // 100 threshold line - Red coral for high visibility
         const y100 = rect.height - padding - 100 * yScale;
         if (y100 > padding) {
-            ctx.strokeStyle = "#fe6100"; // IBM Orange
+            ctx.strokeStyle = "#FF4D4D"; // Red coral
             ctx.setLineDash([6, 4]);
             ctx.lineWidth = 2;
             ctx.beginPath();
@@ -471,7 +471,7 @@ class CaboGame {
             ctx.stroke();
             ctx.setLineDash([]);
 
-            ctx.fillStyle = "#fe6100"; // IBM Orange
+            ctx.fillStyle = "#FF4D4D"; // Red coral
             ctx.font = "bold 10px Inter, sans-serif";
             ctx.textAlign = "left";
             ctx.fillText("100 (Game End)", padding + 5, y100 - 5);
@@ -518,7 +518,7 @@ class CaboGame {
         });
 
         // X-axis labels
-        ctx.fillStyle = "#393939"; // IBM Gray 70
+        ctx.fillStyle = "#404040"; // Gray 70
         ctx.font = "11px Inter, sans-serif";
         ctx.textAlign = "center";
         for (let i = 0; i < this.currentRound; i++) {
@@ -535,7 +535,7 @@ class CaboGame {
             ctx.arc(legendX + 6, legendY, 5, 0, Math.PI * 2);
             ctx.fill();
 
-            ctx.fillStyle = "#161616"; // IBM Gray 90
+            ctx.fillStyle = "#1a1a1a"; // Gray 90
             ctx.font = "12px Inter, sans-serif";
             ctx.textAlign = "left";
             ctx.fillText(player.name, legendX + 16, legendY + 4);
@@ -582,8 +582,8 @@ class CaboGame {
         canvas.height = window.innerHeight * dpr;
         ctx.scale(dpr, dpr);
 
-        // Confetti colors - IBM Color Blind Safe Palette
-        const colors = [...playerColors, "#648fff", "#785ef0", "#dc267f"];
+        // Confetti colors - Brutalist palette
+        const colors = [...playerColors, "#F0F040", "#0A0A0A", "#FF4D4D", "#50C878"];
         const particles = [];
 
         for (let i = 0; i < 150; i++) {
@@ -679,7 +679,7 @@ class CaboGame {
             left: 50%;
             transform: translateX(-50%) translateY(100px);
             background: var(--surface-90);
-            color: var(--bg-elevated);
+            color: var(--white);
             padding: var(--space-4) var(--space-6);
             border-radius: var(--radius-full);
             font-size: var(--text-sm);
